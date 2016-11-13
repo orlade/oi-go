@@ -3,12 +3,13 @@
 all: build test
 
 build:
+	go get -t ./...
 	go install
 	go build -i -o cli/oi cli/main.go
 	mv cli/oi $(GOPATH)/bin/oi
 
 test:
-	go test
+	go test -v ./...
 
 watch:
 	if [ "$(which watch)" == "" ]; then npm install -g watch; fi
