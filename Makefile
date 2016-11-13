@@ -1,3 +1,7 @@
+.PHONY : all build test watch stop
+
+all: build test
+
 build:
 	go install
 	go build -i -o cli/oi cli/main.go
