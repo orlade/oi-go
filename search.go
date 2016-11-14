@@ -8,8 +8,11 @@ import (
 	"log"
 )
 
+// Get the current user to find their home directory.
 var usr, _ = user.Current()
-var OIPATH = usr.HomeDir + "/.oi/modules"
+
+// TODO(orlade): Replace with environment variable configuration.
+var oipath = usr.HomeDir + "/.oi/modules"
 
 // PluginSearcher finds availble plugins.
 type PluginSearcher interface {
@@ -25,9 +28,9 @@ type HomePluginSearcher struct{}
 func (HomePluginSearcher) Search() map[string]string {
 	plugins := make(map[string]string)
 
-	files, err := filepath.Glob(fmt.Sprintf("%s/*", OIPATH))
+	files, err := filepath.Glob(fmt.Sprintf("%s/*", oipath))
 	if err != nil {
-		log.Fatalf("Error searching for plugins in %s: %s", OIPATH, err)
+		log.Fatalf("Error searching for plugins in %s: %s", oipath, err)
 	}
 
 	// Strip the path and 'oi-' prefix from the commands.
