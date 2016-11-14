@@ -21,8 +21,9 @@ func TestHomePluginSearch_single(t *testing.T) {
 }
 
 func createHomeCommand(name string) (path string) {
-	path = usr.HomeDir + "/.oi/modules/" + name
-	executeChecked("mkdir -p ~/.oi/modules")
+	dir := usr.HomeDir + "/.oi/modules/"
+	executeChecked("mkdir -p " + dir)
+	path = dir + name
 	executeChecked("touch " + path)
 	return
 }
